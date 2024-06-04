@@ -1,0 +1,19 @@
+function create_motion_regressor_mat(subIDs,studyPart,session)
+
+blocks = 1:4;
+
+
+for b = 1:length(blocks)
+ fid = fopen(['/projects/crunchie/nold/PEEP/fMRI/Data/' studyPart '/derivatives/spm_preprocessing/' subIDs ;/ses-01/func/',sprintf('rp_asub-01_ses-01_task-peep_run-%02.2d_bold.txt',blocks(b))]);
+    R2{b,1} = textscan(fid,'%f %f %f %f %f %f');
+    fclose(fid);
+    
+    
+    
+end 
+
+for i = 1:length(blocks)
+R(i,:) = cell2mat(R2{i});
+end 
+
+save('/projects/crunchie/nold/PEEP/fMRI/Data/Pilot-01/derivatives/spm_firstlevel/R.mat','R');

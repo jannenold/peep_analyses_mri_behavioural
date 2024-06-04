@@ -1,0 +1,106 @@
+function combine_move_and_phys_regressors(sub,nSess,n_runs)
+
+% load the preprocessed movement regressors and retroicor regressors
+% and return the way used in SPM. One subject at the time.
+
+% The movement slices are already cropped in the same length as my
+% runs/onsets. Definition of remaining volumes is done in
+% get_nr_of_volumes. remain volumes input = without the unexplained resting
+% variance scans at the end of the run!
+
+% Adapted from the PhysIO toolbox (Kasper) included in TAPAS toolbox (Frässle)
+
+% The 6 realignment parameters can be augmented by their derivatives (in
+% total 12 parameters) + the squares of parameters and derivatives (in
+% total 24 parameters), leading to a Volterra expansion as in
+%
+%     Friston KJ, Williams S, Howard R, Frackowiak
+%     RS, Turner R. Movement-related effects in fMRI
+%     time-series. Magn Reson Med. 1996;35:346?355.)
+
+% derivs: temporal difference of realignment parameters,
+%         prepending one line of zeros (for 1st scan)
+
+% The physio regressors should also already have the correct length!
+
+physio_dir = '/projects/crunchie/nold/PEEP/physiology/MAIN/noise_regressors';
+
+% loop over runs, get the files, compute derivatives and squares
+% concat for run length and
+for g=1:numel(sub)
+for s = 1:nSess
+    for r = 1:n_runs
+
+        clear nui_reg motion physio
+
+        filename     = sprintf('complete_reg_sub-%02d_ses_%02d_run_%02.2d.txt',sub(g),s,r);
+        %strnameRun     = sprintf('ses_%02d_run_%02.2d',s,r);
+
+        % ---------------------------------------------------------------------
+        %               Motion
+        % ---------------------------------------------------------------------
+
+        motion_file_name = sprintf('sub-%02d_motion_ses-%02d_run-%02d.mat',sub(g),s,r);
+
+        if exist([physio_dir filesep motion_file_name])
+            load([physio_dir filesep motion_file_name]);
+            dim_motion = size(motion,1); % check number of scans
+
+        else
+            fprintf('No Motion File for sub-%02d session %02d run %02d',sub(g),s,r);
+        end
+
+
+        % ---------------------------------------------------------------------
+        %               spikes
+        % ---------------------------------------------------------------------
+
+        % check if exists (if not, create placeholder)
+        spike_file_name = sprintf('sub-%02d_nui_reg_mov_ses-%02d_run-%02d.mat',sub(g),s,r);
+
+        if exist([physio_dir filesep spike_file_name])
+            load([physio_dir filesep spike_file_name]);
+            dim_nui_reg = size(nui_reg,1); % check number of scans
+
+        else
+            fprintf('\nNo Spikes File for sub-%02d session-%02d run-%02d\n',sub(g),s,r);
+            nui_reg = [];
+
+        end
+
+
+
+        % ---------------------------------------------------------------------
+        %                 Physio regressors
+        % ---------------------------------------------------------------------
+
+        physio_file_name = sprintf('sub-%02d_physio_ses-%02d_run-%02d.mat',sub(g),s,r);
+
+        if exist([physio_dir filesep physio_file_name])
+            load([physio_dir filesep physio_file_name]);
+            dim_physio = size(physio,1); % check number of scans
+
+        else
+            fprintf('\nNo Physio File for sub-%02d session-%02d run-%02d\n',sub(g),s,r);
+
+
+        end
+
+
+        % ---------------------------------------------------------------------
+        %                 add all nuissance regressors
+        % ---------------------------------------------------------------------
+
+        % compare dimensions before putting together in one file
+        if isequal(dim_motion,dim_physio)
+            complete_reg =   [motion,physio,nui_reg];
+            save(fullfile(physio_dir,filename),'complete_reg','-ascii');
+
+        else
+            error('Dimensions not consistent!')
+        end
+
+    end
+end
+
+end
