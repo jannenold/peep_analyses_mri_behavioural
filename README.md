@@ -1,4 +1,4 @@
-# peep_analyses_mri
+# peep_analyses_mri (MATLAB)
 
 This file contains the custom MRI analyses scripts for the study "_Exercise-induced pain modulation is sex, opioid, and fitness-dependent and mediated by the medial frontal cortex_":
 
