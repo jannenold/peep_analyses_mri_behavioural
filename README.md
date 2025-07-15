@@ -6,6 +6,9 @@ This file contains the custom behavioural and MRI analyses scripts for the study
 - first level analysis
 - second level analyses
 - physiology analyses/extraction
-- behavioural analyses
+- behavioural analyses files include:
+      - peep_compelte_data_clean.txt # cleaned raw data
+      - 01_PEEP_LOAD_IN_DATA.R # Loads in the raw data (needs to be adapted to laod in the raw data txt file only, as this also cleans the data)
+      - analyses_behavioural_effects-exercise_heat.R # runs analyses
 
 For a detailed, open-access preprocessing pipeline (BIDS standard) please refer to https://github.com/ChristianBuechel/spm_bids_pipeline
