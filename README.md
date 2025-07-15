@@ -1,4 +1,4 @@
-Acute aerobic exercise does not modulate pain potentially due to differences in fitness levels and sex effects – results from a pharmacological fMRI study
+**Acute aerobic exercise does not modulate pain potentially due to differences in fitness levels and sex effects – results from a pharmacological fMRI study**
 The data provided corresponds to the eLife paper (https://doi.org/10.7554/eLife.102392.1) by Nold et al. (2025). 
 Description of the data and file structure
 
