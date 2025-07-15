@@ -19,9 +19,9 @@ For a detailed, open-access preprocessing pipeline (BIDS standard) please refer 
 
 **The following datasets/data has been uploaded:**
 
-* - Behavioural raw (cleaned) data*
+ - Behavioural raw (cleaned) data
 
-* - Con Images (uncorrected at p < 0.001) corresponding to the figures of the main article*
+ - Con Images (uncorrected at p < 0.001) corresponding to the figures of the main article
 
 
 **Files and variables**
@@ -69,23 +69,23 @@ pwc: weight corrected FTP value
 expectation_exercise: expectation ratings on exercise 
 
 
-File: elife_figure_5_con_img_uncorrected.nii
+*File: elife_figure_5_con_img_uncorrected.nii*
 
 Description: con image (uncorrected p < 0.001) for figure 5 (interaction stimulus intensity and treatment for heat)
 
-File: elife_figure_2_con_img_unocrrected.nii
+*File: elife_figure_2_con_img_unocrrected.nii*
 
 Description: con image (uncorrected p < 0.001) for figure 2 (heat 70>50>30 in Saline condition for heat)
 
-File: elife_s_svc_mask.nii
+*File: elife_s_svc_mask.nii*
 
 Description: Small volume correction mask used
 
-File: elife_figure_7_con_img_uncorrected.nii
+*File: elife_figure_7_con_img_uncorrected.nii*
 
 Description: con image (uncorrected p < 0.001) for figure 7 ( Exericse high intensity > exercise Low intensity in SALINE condition for heat with covariate FTP)
 
-File: elife_figure_8_con_img_uncorrected.nii
+*File: elife_figure_8_con_img_uncorrected.nii*
 
 Description: con image (uncorrected p < 0.001) for figure 5 (2-sample t-test between males and females for contrast interaction of exercise and drug with covariate FTP for heat)
 
